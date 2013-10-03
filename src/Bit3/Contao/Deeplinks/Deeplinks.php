@@ -17,6 +17,9 @@ namespace Bit3\Contao\Deeplinks;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/**
+ * Manage deep links in the contao backend menu.
+ */
 class Deeplinks extends \BackendModule
 {
 	/**
@@ -27,10 +30,8 @@ class Deeplinks extends \BackendModule
 	 */
 	static public function hookInitializeDependencyContainer()
 	{
-		global $container;
-
 		/** @var EventDispatcher $eventDispatcher */
-		$eventDispatcher = $container['event-dispatcher'];
+		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 		$eventDispatcher->dispatch('deeplinks-create');
 
 		foreach ($GLOBALS['BE_MOD'] as $groupName => $group) {
@@ -58,7 +59,7 @@ class Deeplinks extends \BackendModule
 
 		$active          = null;
 		$currentDeeplink = null;
-		$currentPriority = -PHP_INT_MAX;
+		$currentPriority = -10;
 
 		foreach ($navigation as $groupName => $group) {
 			foreach ($group['modules'] as $moduleName => $module) {
@@ -101,8 +102,13 @@ class Deeplinks extends \BackendModule
 	 *
 	 * @SuppressWarnings(PHPMD.NPathComplexity)
 	 */
-	protected function doMatch($groupName, $moduleName, array $module, &$currentDeeplink, &$currentPriority)
-	{
+	protected function doMatch(
+		$groupName,
+		$moduleName,
+		array $module,
+		&$currentDeeplink,
+		&$currentPriority
+	) {
 		$input = \Input::getInstance();
 
 		$search = $this->parseSearchParametersFromModule($module);
@@ -223,7 +229,14 @@ class Deeplinks extends \BackendModule
 			) {
 				switch ($GLOBALS['TL_DCA'][$currentTable]['config']['dataContainer']) {
 					case 'Table':
-						return $this->doRecordMatchOnDCTable($searchTable, $searchId, $currentTable, $currentId);
+						return $this->doRecordMatchOnDcTable(
+							$searchTable,
+							$searchId,
+							$currentTable,
+							$currentId
+						);
+
+					default:
 				}
 			}
 		}
@@ -244,15 +257,19 @@ class Deeplinks extends \BackendModule
 	 * @SuppressWarnings(PHPMD.Superglobals)
 	 * @SuppressWarnings(PHPMD.CamelCaseVariableName)
 	 */
-	protected function doRecordMatchOnDCTable($searchTable, $searchId, $currentTable, $currentId)
+	protected function doRecordMatchOnDcTable($searchTable, $searchId, $currentTable, $currentId)
 	{
 		if (isset($GLOBALS['TL_DCA'][$currentTable]['config']['ptable'])) {
 			$parentTable = $GLOBALS['TL_DCA'][$currentTable]['config']['ptable'];
 
 			// Edit mode: $id is the id of the table record
-			if (\Input::getInstance()->get('act')) {
+			if (\Input::getInstance()
+				->get('act')
+			) {
+				$currentTable = preg_replace('~[^\w\d]~', '', $currentTable);
+
 				$resultSet = \Database::getInstance()
-					->prepare('SELECT * FROM ' . preg_replace('~[^\w\d]~', '', $currentTable) . ' WHERE id=?')
+					->prepare('SELECT * FROM ' . $currentTable . ' WHERE id=?')
 					->execute($currentId);
 
 				if ($resultSet->next()) {
@@ -301,7 +318,10 @@ class Deeplinks extends \BackendModule
 			}
 		}
 
-		throw new \RuntimeException('Could not find the deeplink target, you need to specify the "deeplink" property for this module!');
+		throw new \RuntimeException(
+			'Could not find the deeplink target, ' .
+			'you need to specify the "deeplink" property for this module!'
+		);
 	}
 
 	/**
