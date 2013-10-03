@@ -95,7 +95,8 @@ class MyClass
 	{
 		$database = \Database::getInstance();
 
-		// fetch items from database and create the items in $GLOBALS['BE_MOD'] dynamically
+		// fetch items from database and create
+		// the items in $GLOBALS['BE_MOD'] dynamically
 	}
 }
 ```
