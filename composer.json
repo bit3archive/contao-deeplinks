@@ -32,7 +32,7 @@
 	"prefer-stable": true,
 	"autoload":{
 		"psr-0":{
-			"Bit3\\Deeplinks": "src/"
+			"Bit3\\Contao\\Deeplinks": "src/"
 		}
 	},
 	"extra": {
