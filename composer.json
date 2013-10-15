@@ -23,7 +23,7 @@
 		"contao/core": ">=2.11,<3.2",
 		"contao-community-alliance/composer-installer": "*",
 		"bit3/contao-dependency-container": "~1.3",
-		"bit3/contao-event-dispatcher":"2.3.*"
+		"bit3/contao-event-dispatcher":"~1"
 	},
 	"require-dev":{
 		"bit3/php-coding-standard":"2.*"
