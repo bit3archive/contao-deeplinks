@@ -62,12 +62,14 @@ class Deeplinks extends \BackendModule
 		$currentPriority = -10;
 
 		foreach ($navigation as $groupName => $group) {
-			foreach ($group['modules'] as $moduleName => $module) {
-				if (isset($module['deeplink'])) {
-					$this->doMatch($groupName, $moduleName, $module, $currentDeeplink, $currentPriority);
-				}
-				if (preg_match('#(^active | active | active$)#', $module['class'])) {
-					$active = array($groupName, $moduleName);
+			if (is_array($group['modules'])) {
+				foreach ($group['modules'] as $moduleName => $module) {
+					if (isset($module['deeplink'])) {
+						$this->doMatch($groupName, $moduleName, $module, $currentDeeplink, $currentPriority);
+					}
+					if (preg_match('#(^active | active | active$)#', $module['class'])) {
+						$active = array($groupName, $moduleName);
+					}
 				}
 			}
 		}
