@@ -3,33 +3,126 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0f9b4f7799df12b1ab686f6e062f0a09",
+    "hash": "d2cd7bf9b95bbee509edf3503edaa2ab",
     "packages": [
         {
-            "name": "bit3/contao-dependency-container",
-            "version": "1.3",
+            "name": "bit3/contao-event-dispatcher",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bit3/contao-dependency-container.git",
-                "reference": "a9f9ed1e6a8245f0ca212ef572cc58cadb5dfd4d"
+                "url": "https://github.com/bit3/contao-event-dispatcher.git",
+                "reference": "04a5e23fa8aa5c840bb3e340d685a0da10e7783f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bit3/contao-dependency-container/zipball/a9f9ed1e6a8245f0ca212ef572cc58cadb5dfd4d",
-                "reference": "a9f9ed1e6a8245f0ca212ef572cc58cadb5dfd4d",
+                "url": "https://api.github.com/repos/bit3/contao-event-dispatcher/zipball/04a5e23fa8aa5c840bb3e340d685a0da10e7783f",
+                "reference": "04a5e23fa8aa5c840bb3e340d685a0da10e7783f",
                 "shasum": ""
             },
             "require": {
                 "contao-community-alliance/composer-installer": "*",
-                "contao/core": ">=2.11",
+                "contao-community-alliance/dependency-container": "~1",
+                "contao/core": ">=2.11,<3.3",
+                "php": ">=5.3",
+                "symfony/event-dispatcher": "2.3.*"
+            },
+            "replace": {
+                "bit3/contao-event-dispatcher": "*"
+            },
+            "type": "contao-module",
+            "extra": {
+                "contao": {
+                    "sources": {
+                        "contao": "system/modules/event-dispatcher"
+                    }
+                },
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-develop": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "ContaoCommunityAlliance\\Contao\\EventDispatcher": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Tristan Lins",
+                    "email": "tristan.lins@bit3.de",
+                    "homepage": "http://bit3.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Event dispatcher service for Contao Open Source CMS",
+            "keywords": [
+                "contao",
+                "event"
+            ],
+            "time": "2013-10-28 18:10:40"
+        },
+        {
+            "name": "contao-community-alliance/composer-installer",
+            "version": "1.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/contao-community-alliance/composer-installer.git",
+                "reference": "94eed9718a3f7a7d7ff950fc24d3cc6b2f4ff7ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/contao-community-alliance/composer-installer/zipball/94eed9718a3f7a7d7ff950fc24d3cc6b2f4ff7ae",
+                "reference": "94eed9718a3f7a7d7ff950fc24d3cc6b2f4ff7ae",
+                "shasum": ""
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev"
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "ContaoCommunityAlliance\\ComposerInstaller\\ModuleInstaller"
+            },
+            "autoload": {
+                "psr-0": {
+                    "ContaoCommunityAlliance\\ComposerInstaller": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv3"
+            ],
+            "time": "2013-10-28 17:10:23"
+        },
+        {
+            "name": "contao-community-alliance/dependency-container",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/contao-community-alliance/dependency-container.git",
+                "reference": "0ccfc6012ca1956b9751f74d97be36ba88f33f4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/contao-community-alliance/dependency-container/zipball/0ccfc6012ca1956b9751f74d97be36ba88f33f4f",
+                "reference": "0ccfc6012ca1956b9751f74d97be36ba88f33f4f",
+                "shasum": ""
+            },
+            "require": {
+                "contao-community-alliance/composer-installer": "*",
+                "contao/core": ">=2.11,<3.3",
                 "php": ">=5.3",
                 "pimple/pimple": "~1"
             },
             "replace": {
+                "bit3/contao-dependency-container": "*",
                 "contao-legacy/dependency-container": "*"
             },
             "suggest": {
-                "bit3/contao-dependency-container-inspector": "*"
+                "contao-community-alliance/dependency-container-inspector": "*"
             },
             "type": "contao-module",
             "extra": {
@@ -39,7 +132,8 @@
                     }
                 },
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "1.3.x-dev",
+                    "dev-develop": "1.4.x-dev"
                 }
             },
             "autoload": {
@@ -67,103 +161,20 @@
                 "di",
                 "injection"
             ],
-            "time": "2013-10-03 17:02:16"
-        },
-        {
-            "name": "bit3/contao-event-dispatcher",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bit3/contao-event-dispatcher.git",
-                "reference": "1ecc0bdb3da2c95ff29038ec3c1bd252d138b442"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bit3/contao-event-dispatcher/zipball/1ecc0bdb3da2c95ff29038ec3c1bd252d138b442",
-                "reference": "1ecc0bdb3da2c95ff29038ec3c1bd252d138b442",
-                "shasum": ""
-            },
-            "require": {
-                "bit3/contao-dependency-container": "~1",
-                "contao-community-alliance/composer-installer": "*",
-                "contao/core": "*",
-                "php": ">=5.3",
-                "symfony/event-dispatcher": "2.3.*"
-            },
-            "type": "contao-module",
-            "extra": {
-                "contao": {
-                    "sources": {
-                        "contao": "system/modules/event-dispatcher"
-                    }
-                },
-                "branch-alias": {
-                    "dev-master": "2.3.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Tristan Lins",
-                    "email": "tristan.lins@bit3.de",
-                    "homepage": "http://bit3.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Event dispatcher service for Contao Open Source CMS",
-            "keywords": [
-                "contao",
-                "event"
-            ],
-            "time": "2013-09-09 18:13:31"
-        },
-        {
-            "name": "contao-community-alliance/composer-installer",
-            "version": "1.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ContaoCommunityAlliance/ComposerInstaller.git",
-                "reference": "54a0d252b2f3248733b1c19a7cd9edbc18cf0048"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ContaoCommunityAlliance/ComposerInstaller/zipball/54a0d252b2f3248733b1c19a7cd9edbc18cf0048",
-                "reference": "54a0d252b2f3248733b1c19a7cd9edbc18cf0048",
-                "shasum": ""
-            },
-            "require-dev": {
-                "composer/composer": "1.0.*@dev"
-            },
-            "type": "composer-installer",
-            "extra": {
-                "class": "ContaoCommunityAlliance\\ComposerInstaller\\ModuleInstaller"
-            },
-            "autoload": {
-                "psr-0": {
-                    "ContaoCommunityAlliance\\ComposerInstaller": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPLv3"
-            ],
-            "time": "2013-09-13 09:10:36"
+            "time": "2013-10-28 16:11:09"
         },
         {
             "name": "contao/core",
-            "version": "3.1.0",
+            "version": "3.1.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ContaoCommunityAlliance/composerized-contao-core.git",
-                "reference": "8b030e1761aa1ec7dc700dbde10e77be3573ce82"
+                "url": "https://github.com/contao-community-alliance/composerized-contao-core.git",
+                "reference": "e23bbdf2242290186b01ca4380764ec0d1a7f63c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ContaoCommunityAlliance/composerized-contao-core/zipball/8b030e1761aa1ec7dc700dbde10e77be3573ce82",
-                "reference": "8b030e1761aa1ec7dc700dbde10e77be3573ce82",
+                "url": "https://api.github.com/repos/contao-community-alliance/composerized-contao-core/zipball/e23bbdf2242290186b01ca4380764ec0d1a7f63c",
+                "reference": "e23bbdf2242290186b01ca4380764ec0d1a7f63c",
                 "shasum": ""
             },
             "require": {
@@ -193,7 +204,7 @@
                 "contao",
                 "core"
             ],
-            "time": "2013-06-05 03:33:48"
+            "time": "2013-10-28 15:13:50"
         },
         {
             "name": "pimple/pimple",
@@ -243,7 +254,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.3.5",
+            "version": "v2.3.6",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
